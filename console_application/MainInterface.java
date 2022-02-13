@@ -2,23 +2,34 @@ package console_application;
 
 import console_application.work_with_route.CreatingNewInstance;
 import route.Route;
+import work_with_external_data.parsed_objects.ParsedObject;
 
+import java.io.*;
 import java.util.*;
 
 public class MainInterface {
     public MainInterface() {}
 
-    public void startMainInterface(List<Route> data)
+    public void startMainInterface(List<Route> data, Input input)
     {
         String inputLine;
         Scanner cin = new Scanner(System.in);
         while(true)
         {
-            inputLine = cin.nextLine();
+            try {
+                inputLine = input.nextLine();
+                if(inputLine == null)
+                    return;
+            }
+            catch (IOException exio)
+            {
+                System.out.println("Такого файла нет");
+                return;
+            }
 
             try
             {
-                execCommand(inputLine, data);
+                execCommand(inputLine, data, input);
             }
             catch (WrongCommand exc)
             {
@@ -33,10 +44,14 @@ public class MainInterface {
             {
                 System.out.println("В качестве id введите целое число");
             }
+            catch (IOException exf)
+            {
+                System.out.println("Файл не найден, попробуйте снова");
+            }
         }
     }
 
-    private void execCommand(String command, List<Route> data) throws WrongCommand, ExitProgram, NumberFormatException
+    private void execCommand(String command, List<Route> data, Input input) throws WrongCommand, ExitProgram, NumberFormatException, IOException
     {
         List<String> splittedCommand = new LinkedList<>(List.of(command.split("\s+")));
 
@@ -69,15 +84,9 @@ public class MainInterface {
                 else
                     throw new WrongCommand();
                 break;
-            case "clear":
-                if(splittedCommand.size() == 1)
-                    clear(data);
-                else
-                    throw new WrongCommand();
-                break;
             case "add":
                 if(splittedCommand.size() == 2 && splittedCommand.get(1).equals("Route"))
-                    add(data);
+                    add(data, input);
                 else if(splittedCommand.size() == 2 && !splittedCommand.get(1).equals("Route"))
                     throw new WrongCommand("В коллекцию можно дабовить только объект класса Route");
                 else
@@ -85,13 +94,25 @@ public class MainInterface {
                 break;
             case "update":
                 if(splittedCommand.size() == 2)
-                    update(data, splittedCommand.get(1));
+                    update(data, splittedCommand.get(1), input);
                 else
                     throw new WrongCommand();
                 break;
             case "remove_by_id":
                 if(splittedCommand.size() == 2)
                     remove_by_id(data, splittedCommand.get(1));
+                else
+                    throw new WrongCommand();
+                break;
+            case "clear":
+                if(splittedCommand.size() == 1)
+                    clear(data);
+                else
+                    throw new WrongCommand();
+                break;
+            case "execute_script":
+                if(splittedCommand.size() == 2)
+                    execute_script(data, splittedCommand.get(1));
                 else
                     throw new WrongCommand();
                 break;
@@ -102,19 +123,19 @@ public class MainInterface {
                     throw new WrongCommand();
             case "add_if_max":
                 if(splittedCommand.size() == 2 && splittedCommand.get(1).equals("Route"))
-                    add_if_max(data);
+                    add_if_max(data, input);
                 else
                     throw new WrongCommand();
                 break;
             case "remove_greater":
                 if(splittedCommand.size() == 2 && splittedCommand.get(1).equals("Route"))
-                    remove_greater(data);
+                    remove_greater(data, input);
                 else
                     throw new WrongCommand();
                 break;
             case "remove_lower":
                 if(splittedCommand.size() == 2 && splittedCommand.get(1).equals("Route"))
-                    remove_lower(data);
+                    remove_lower(data, input);
                 else
                     throw new WrongCommand();
                 break;
@@ -176,19 +197,19 @@ public class MainInterface {
         }
     }
 
-    private void add(List<Route> data)
+    private void add(List<Route> data, Input input) throws IOException
     {
-        data.add(CreatingNewInstance.createNewRouteInstance());
+        data.add(CreatingNewInstance.createNewRouteInstance(input));
         System.out.println("Новый экземпляр класса успешно добавлен в коллекцию");
     }
 
-    private void update(List<Route> data, String id) throws NumberFormatException
+    private void update(List<Route> data, String id, Input input) throws NumberFormatException, IOException
     {
         for (int i = 0; i < data.size(); i++)
         {
             if(data.get(i).getId().equals(Integer.decode(id)))
             {
-                data.get(i).updateValues(CreatingNewInstance.createNewRouteInstance());
+                data.get(i).updateValues(CreatingNewInstance.createNewRouteInstance(input));
                 System.out.println("Объект с id " + id + " успешно изменен");
                 return;
             }
@@ -222,9 +243,15 @@ public class MainInterface {
         System.out.println("Коллекция сохранена в файл");
     }
 
-    private void add_if_max(List<Route> data)
+    private void execute_script(List<Route> data, String fileName) throws FileNotFoundException
     {
-        Route toAddIfMax = CreatingNewInstance.createNewRouteInstance();
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
+        new MainInterface().startMainInterface(data, bufferedReader::readLine);
+    }
+
+    private void add_if_max(List<Route> data, Input input) throws IOException
+    {
+        Route toAddIfMax = CreatingNewInstance.createNewRouteInstance(input);
 
         if(toAddIfMax.compareTo(Collections.max(data)) > 0)
         {
@@ -235,9 +262,9 @@ public class MainInterface {
             System.out.println("Новый объект не больше максимального элемента коллекции, потому не был добавлен");
     }
 
-    private void remove_greater(List<Route> data)
+    private void remove_greater(List<Route> data, Input input) throws IOException
     {
-        Route forComparison = CreatingNewInstance.createNewRouteInstance();
+        Route forComparison = CreatingNewInstance.createNewRouteInstance(input);
 
         for (int i = data.size() - 1; i >= 0; i--)
         {
@@ -248,9 +275,9 @@ public class MainInterface {
         System.out.println("Элементы коллекции, превышающие заданный, успешно удалены");
     }
 
-    private void remove_lower(List<Route> data)
+    private void remove_lower(List<Route> data, Input input) throws IOException
     {
-        Route forComparison = CreatingNewInstance.createNewRouteInstance();
+        Route forComparison = CreatingNewInstance.createNewRouteInstance(input);
 
         for (int i = data.size() - 1; i >= 0; i--)
         {

@@ -1,8 +1,10 @@
 package console_application.work_with_route;
 
+import console_application.Input;
 import route.Coordinates;
 import route.Route;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class CreatingNewInstance {
@@ -20,9 +22,8 @@ public class CreatingNewInstance {
 
     private CreatingNewInstance() {}
 
-    public static Route createNewRouteInstance()
+    public static Route createNewRouteInstance(Input cin) throws IOException
     {
-        Scanner cin = new Scanner(System.in);
         boolean continueKey = false;
         String input;
         System.out.println("Условимся, что пустая строка - это null");

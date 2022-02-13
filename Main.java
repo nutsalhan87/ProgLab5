@@ -5,6 +5,7 @@ import route.Route;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main
 {
@@ -21,6 +22,6 @@ public class Main
                 new route.second_location.Location(100, 100, 100), 200));
 
         MainInterface mainInterface = new MainInterface();
-        mainInterface.startMainInterface(data);
+        mainInterface.startMainInterface(data, () -> {return new Scanner(System.in).nextLine();});
     }
 }
