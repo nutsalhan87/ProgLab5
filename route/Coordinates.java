@@ -1,7 +1,7 @@
 package route;
 
 /**
- * Класс хранит координаты в двумерном пространстве
+ * The class stores coordinates in two-dimensional space
  */
 
 public class Coordinates implements Comparable<Coordinates> {

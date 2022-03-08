@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Специальный класс, объекты которого хранят данные парсинга
+ * A special class whose objects store parsing data
  */
 
 public class ParsedObject {

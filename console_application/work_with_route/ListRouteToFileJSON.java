@@ -9,8 +9,8 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Класс содержит единственный метод, который является реализацией функционального интерфейса @see console_application.Input и который
- * конвертирует коллекцию объектов Route в формат данных JSON, а после сохраняет результат в файл
+ * The class contains a single method that is an implementation of the functional interface Input and
+ * which converts a collection of Route objects to JSON data format, and then saves the result to a file
  */
 
 public class ListRouteToFileJSON implements SaveData<Route> {

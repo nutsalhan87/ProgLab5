@@ -4,11 +4,11 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Интерфейс содержит заголовок метода, который реализует сохранение объекта обобщенного типа (зависит от реализации) в
- * данные определенного формата (тоже зависит от реализации)
+ * The interface contains the header of a method that implements saving an object of a generalized type
+ * (depends on the implementation) to data of a certain format (also depends on the implementation)
  * @param <T>
  */
 
 public interface SaveData<T> {
-    public void saveInFile(String path, List<T> data) throws IOException;
+    void saveInFile(String path, List<T> data) throws IOException;
 }

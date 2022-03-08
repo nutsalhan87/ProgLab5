@@ -1,7 +1,7 @@
 package console_application.work_with_route;
 
 /**
- * Класс-перечисление, который хранит в себе кодовые имена всех полей класса Route и его классов, объекты которых хранит Route
+ * An enumeration class that stores the code names of all the fields of the Route class and its classes, the objects of which Route stores
  */
 public enum RouteFields {
     R_NAME,

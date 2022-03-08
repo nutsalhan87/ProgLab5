@@ -1,8 +1,8 @@
 package route;
 
 /**
- * Класс Route предназначен для хранения данных маршруте и содержит такие данные, как имя, координаты, расстояние, места начала и конца,
- * а также уникальный идентефикатор и дату создания объекта
+ * The Route class is designed to store route data and contains data such as name, coordinates, distance,
+ * start and end locations, as well as a unique identifier and the date of creation of the object
  */
 
 public class Route implements Comparable<Route> {

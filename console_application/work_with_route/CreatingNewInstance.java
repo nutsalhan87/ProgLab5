@@ -7,7 +7,7 @@ import route.Route;
 import java.io.IOException;
 
 /**
- * Класс содержит единственный метод, который создает экземпляр класса Route посредством ввода каждого поля данных вручную или из файла
+ * The class contains a single method that creates an instance of the Route class by entering each data field manually or from a file
  */
 
 public class CreatingNewInstance {

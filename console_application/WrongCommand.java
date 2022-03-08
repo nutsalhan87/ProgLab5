@@ -1,7 +1,7 @@
 package console_application;
 
 /**
- * Класс-исключение, который описывает исключение, вызываемое, если на обработку подана неверная команда
+ * An exception class that describes an exception that is called if an invalid command is submitted for processing
  */
 
 public class WrongCommand extends Exception {

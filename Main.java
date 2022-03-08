@@ -11,6 +11,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Main class which contains a single method which reads data from file and starts console interface
+ */
+
 public class Main {
     public static void main(String args[]) throws IOException {
         ParsedObject parsedObject = new JSONToParsedObject().parseFile(System.getenv("Lab5Data"));

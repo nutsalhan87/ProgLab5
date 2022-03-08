@@ -11,14 +11,15 @@ import java.util.List;
 import java.util.regex.*;
 
 /**
- * Класс содержит единственный метод для парсинга JSON-данных из файла в объект специального класса: @see work_with_external_data.parsed_objects.ParsedObject
+ * The class contains a single method for parsing JSON data from a file into
+ * an object of a special class ParsedObject
  */
 
 public class JSONToParsedObject implements ParseExternalData {
     public JSONToParsedObject() {
     }
 
-    public ParsedObject parseFile(String path) throws FileNotFoundException, IOException {
+    public ParsedObject parseFile(String path) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(path));
         String data = "";
         String input;

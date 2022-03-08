@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Специальный класс, объекты которого хранят данные парсинга в виде списков
+ * A special class whose objects store parsing data in the form of lists
  */
 
 public class ParsedList extends ParsedObject {

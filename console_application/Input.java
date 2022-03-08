@@ -3,8 +3,8 @@ package console_application;
 import java.io.IOException;
 
 /**
- * Функциональный интерфейс содержит заголовок метода, реализующего ввод данных с внешнего источника
+ * The functional interface contains the header of the method implementing data input from an external source
  */
 public interface Input {
-    public String nextLine() throws IOException;
+    String nextLine() throws IOException;
 }

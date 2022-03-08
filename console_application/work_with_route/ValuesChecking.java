@@ -3,7 +3,7 @@ package console_application.work_with_route;
 import java.util.regex.*;
 
 /**
- * Класс содержит единственный метод, который проверяет допустимость введенных данных
+ * The class contains a single method that checks the validity of the entered data
  */
 public class ValuesChecking {
     private ValuesChecking() {

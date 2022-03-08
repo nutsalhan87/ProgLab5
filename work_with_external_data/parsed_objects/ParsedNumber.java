@@ -1,7 +1,7 @@
 package work_with_external_data.parsed_objects;
 
 /**
- * Специальный класс, объекты которого хранят данные парсинга в виде чисел
+ * A special class whose objects store parsing data in the form of numbers
  */
 
 public class ParsedNumber extends ParsedObject {

@@ -1,7 +1,7 @@
 package route.second_location;
 
 /**
- * Класс хранит координаты в трехмерном пространстве
+ * The class stores coordinates in three-dimensional space
  */
 
 public class Location implements Comparable<route.second_location.Location> {

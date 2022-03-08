@@ -1,7 +1,7 @@
 package console_application;
 
 /**
- * Класс-исключение, который описывает исключение, необходимое для реализации команды exit, которая совершает выход из программы
+ * An exception class that describes the exception required to implement the exit command that exits the program
  */
 public class ExitProgram extends Exception {
     public ExitProgram() {

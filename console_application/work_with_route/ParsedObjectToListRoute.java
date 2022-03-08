@@ -8,8 +8,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Класс реализует единственный метод, который конвертирует объект специального класса @see work_with_external_data.parsed_objects.ParsedObject в
- * список объектов Route
+ * The class implements a single method that converts an object of the special
+ * class ParsedObject to the list of Route objects
  */
 
 public class ParsedObjectToListRoute {

@@ -8,22 +8,22 @@ import java.io.*;
 import java.util.*;
 
 /**
- * Класс, который реализует консольный интерфейс для управления данными
- * @author Нуцалханов Нуцалхан
+ * A class that implements a console interface for data management
+ * @author Nutsalhan Nutsalhanov
  * @version 1.0
  */
 
 public class MainInterface {
     /**
-     * Основной конструктор
+     * Main constructor
      */
     public MainInterface() {
     }
 
     /**
-     * Метод запускает консольный интерфейс для управления данными
-     * @param data - список объектов класса @see route.Route
-     * @param input - лямбда-функция @see console_application.Input, реализующая ввод
+     * The method launches a console interface for data management
+     * @param data - collection of instances of the Route class
+     * @param input - lamda-method which implements functional interface Input
      */
     public void startMainInterface(List<Route> data, Input input) {
         String inputLine;
@@ -53,14 +53,14 @@ public class MainInterface {
     }
 
     /**
-     * Метод отвечает за обработку и выполнение команд
-     * @param command - команда
-     * @param data - список объектов класса @see route.Route
-     * @param input - лямбда-функция @see console_application.Input, реализующая ввод
-     * @throws WrongCommand - исключение, пробрасываемое при неверной команде
-     * @throws ExitProgram - исключение, необходимое для реализации команды exit, которая совершает выход из программы
-     * @throws NumberFormatException - исключение, пробрасываемое при водде некорректного числа
-     * @throws IOException - исключение, пробрасываемое, если нет доступа к файлу или есть иные ошибки ввода/вывода
+     * The method is responsible for processing and executing commands
+     * @param command - command
+     * @param data - collection of instances of the Route class
+     * @param input - lamda-method which implements functional interface Input
+     * @throws WrongCommand - an exception thrown when the command is incorrect
+     * @throws ExitProgram - the exception required to implement the exit command that exits the program
+     * @throws NumberFormatException - exception thrown when entering an incorrect number
+     * @throws IOException - an exception thrown if there is no access to the file or there are other I/O errors
      */
     private void execCommand(String command, List<Route> data, Input input) throws WrongCommand, ExitProgram, NumberFormatException, IOException {
         List<String> splittedCommand = new LinkedList<>(List.of(command.split("\s+")));

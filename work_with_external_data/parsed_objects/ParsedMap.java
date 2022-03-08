@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Специальный класс, объекты которого хранят данные парсинга в виде словарей
+ * A special class whose objects store parsing data in the form of dictionaries
  */
 
 public class ParsedMap extends ParsedObject {
