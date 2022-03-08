@@ -2,13 +2,13 @@
   {
     "Route":
     {
-      "name": "Way1",
+      "name": "way1",
       "coordinates":
       {
         "x": 87.23,
         "y": 22
       },
-      "creationDate": 0,
+      "distance": 2,
       "first_location":
       {
         "Location":
@@ -39,7 +39,7 @@
         "x": 44.86,
         "y": 43
       },
-      "creationDate": 0,
+      "distance": 41,
       "first_location":
       {
         "Location":

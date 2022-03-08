@@ -5,65 +5,46 @@ import route.Coordinates;
 import route.Route;
 
 import java.io.IOException;
-import java.util.Scanner;
+
+/**
+ * Класс содержит единственный метод, который создает экземпляр класса Route посредством ввода каждого поля данных вручную или из файла
+ */
 
 public class CreatingNewInstance {
-    private String rNameI;
-    private Double rDistanceI;
-    private Double cXI;
-    private Integer cYI;
-    private Double flXI;
-    private Long flYI;
-    private Double flZI;
-    private String flNameI;
-    private Integer slXI;
-    private Integer slYI;
-    private Float slZI;
+    private CreatingNewInstance() {
+    }
 
-    private CreatingNewInstance() {}
-
-    public static Route createNewRouteInstance(Input cin) throws IOException
-    {
+    public static Route createNewRouteInstance(Input cin) throws IOException {
         boolean continueKey = false;
         String input;
         System.out.println("Условимся, что пустая строка - это null");
 
         System.out.println("Задание основных значений полей для объекта класса Route:");
         String rName = null;
-        while (!continueKey)
-        {
+        while (!continueKey) {
             System.out.print("Введите имя: ");
             input = cin.nextLine();
-            try
-            {
+            try {
                 input = ValuesChecking.checkCondition(input, RouteFields.R_NAME);
                 rName = input;
                 continueKey = true;
-            }
-            catch (IllegalArgumentException exc)
-            {
+            } catch (IllegalArgumentException exc) {
                 System.out.println(exc.getMessage());
             }
         }
         continueKey = false;
 
         Double rDistance = null;
-        while (!continueKey)
-        {
+        while (!continueKey) {
             System.out.print("Введите дистанцию: ");
             input = cin.nextLine();
-            try
-            {
+            try {
                 input = ValuesChecking.checkCondition(input, RouteFields.R_DISTANCE);
                 rDistance = Double.parseDouble(input);
                 continueKey = true;
-            }
-            catch (NumberFormatException exn)
-            {
+            } catch (NumberFormatException exn) {
                 System.out.println("Введите корректное число");
-            }
-            catch (IllegalArgumentException exc)
-            {
+            } catch (IllegalArgumentException exc) {
                 System.out.println(exc.getMessage());
             }
         }
@@ -71,44 +52,32 @@ public class CreatingNewInstance {
 
         System.out.println("Задание основных значений полей для объекта класса Coordinates:");
         Double cX = null;
-        while (!continueKey)
-        {
+        while (!continueKey) {
             System.out.print("Введите значение x: ");
             input = cin.nextLine();
-            try
-            {
+            try {
                 input = ValuesChecking.checkCondition(input, RouteFields.C_X);
                 cX = Double.parseDouble(input);
                 continueKey = true;
-            }
-            catch (NumberFormatException exn)
-            {
+            } catch (NumberFormatException exn) {
                 System.out.println("Введите корректное число");
-            }
-            catch (IllegalArgumentException exc)
-            {
+            } catch (IllegalArgumentException exc) {
                 System.out.println(exc.getMessage());
             }
         }
         continueKey = false;
 
         Integer cY = null;
-        while (!continueKey)
-        {
+        while (!continueKey) {
             System.out.print("Введите значение y: ");
             input = cin.nextLine();
-            try
-            {
+            try {
                 input = ValuesChecking.checkCondition(input, RouteFields.C_Y);
                 cY = ((Double) Double.parseDouble(input)).intValue();
                 continueKey = true;
-            }
-            catch (NumberFormatException exn)
-            {
+            } catch (NumberFormatException exn) {
                 System.out.println("Введите корректное число");
-            }
-            catch (IllegalArgumentException exc)
-            {
+            } catch (IllegalArgumentException exc) {
                 System.out.println(exc.getMessage());
             }
         }
@@ -116,76 +85,58 @@ public class CreatingNewInstance {
 
         System.out.println("Задание основных значений полей для объекта класса route.first_location.Location:");
         Double flX = null;
-        while (!continueKey)
-        {
+        while (!continueKey) {
             System.out.print("Введите значение x: ");
             input = cin.nextLine();
-            try
-            {
+            try {
                 input = ValuesChecking.checkCondition(input, RouteFields.FL_X);
                 flX = Double.parseDouble(input);
                 continueKey = true;
-            }
-            catch (NumberFormatException exn)
-            {
+            } catch (NumberFormatException exn) {
                 System.out.println("Введите корректное число");
             }
         }
         continueKey = false;
 
         Long flY = null;
-        while (!continueKey)
-        {
+        while (!continueKey) {
             System.out.print("Введите значение y: ");
             input = cin.nextLine();
-            try
-            {
+            try {
                 input = ValuesChecking.checkCondition(input, RouteFields.FL_Y);
                 flY = ((Double) Double.parseDouble(input)).longValue();
                 continueKey = true;
-            }
-            catch (NumberFormatException exn)
-            {
+            } catch (NumberFormatException exn) {
                 System.out.println("Введите корректное число");
-            }
-            catch (IllegalArgumentException exc)
-            {
+            } catch (IllegalArgumentException exc) {
                 System.out.println(exc.getMessage());
             }
         }
         continueKey = false;
 
         Double flZ = null;
-        while (!continueKey)
-        {
+        while (!continueKey) {
             System.out.print("Введите значение z: ");
             input = cin.nextLine();
-            try
-            {
+            try {
                 input = ValuesChecking.checkCondition(input, RouteFields.FL_Z);
                 flZ = Double.parseDouble(input);
                 continueKey = true;
-            }
-            catch (NumberFormatException exn)
-            {
+            } catch (NumberFormatException exn) {
                 System.out.println("Введите корректное число");
             }
         }
         continueKey = false;
 
         String flName = null;
-        while (!continueKey)
-        {
+        while (!continueKey) {
             System.out.print("Введите имя: ");
             input = cin.nextLine();
-            try
-            {
+            try {
                 input = ValuesChecking.checkCondition(input, RouteFields.FL_NAME);
                 flName = input;
                 continueKey = true;
-            }
-            catch (IllegalArgumentException exc)
-            {
+            } catch (IllegalArgumentException exc) {
                 System.out.println(exc.getMessage());
             }
         }
@@ -193,58 +144,44 @@ public class CreatingNewInstance {
 
         System.out.println("Задание основных значений полей для объекта класса route.second_location.Location:");
         Integer slX = null;
-        while (!continueKey)
-        {
+        while (!continueKey) {
             System.out.print("Введите значение x: ");
             input = cin.nextLine();
-            try
-            {
+            try {
                 input = ValuesChecking.checkCondition(input, RouteFields.SL_X);
                 slX = ((Double) Double.parseDouble(input)).intValue();
                 continueKey = true;
-            }
-            catch (NumberFormatException exn)
-            {
+            } catch (NumberFormatException exn) {
                 System.out.println("Введите корректное число");
-            }
-            catch (IllegalArgumentException exc)
-            {
+            } catch (IllegalArgumentException exc) {
                 System.out.println(exc.getMessage());
             }
         }
         continueKey = false;
 
         Integer slY = null;
-        while (!continueKey)
-        {
+        while (!continueKey) {
             System.out.print("Введите значение y: ");
             input = cin.nextLine();
-            try
-            {
+            try {
                 input = ValuesChecking.checkCondition(input, RouteFields.SL_Y);
                 slY = ((Double) Double.parseDouble(input)).intValue();
                 continueKey = true;
-            }
-            catch (NumberFormatException exn)
-            {
+            } catch (NumberFormatException exn) {
                 System.out.println("Введите корректное число");
             }
         }
         continueKey = false;
 
         Float slZ = null;
-        while (!continueKey)
-        {
+        while (!continueKey) {
             System.out.print("Введите значение z: ");
             input = cin.nextLine();
-            try
-            {
+            try {
                 input = ValuesChecking.checkCondition(input, RouteFields.SL_Z);
                 slZ = ((Double) Double.parseDouble(input)).floatValue();
                 continueKey = true;
-            }
-            catch (NumberFormatException exn)
-            {
+            } catch (NumberFormatException exn) {
                 System.out.println("Введите корректное число");
             }
         }
