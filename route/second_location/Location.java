@@ -68,13 +68,13 @@ public class Location implements Comparable<route.second_location.Location> {
     public String toJSON(int deep) {
         String paragraph = " ";
         return  "\"second_location\": \n " +
-                paragraph.repeat(deep) + "{\n" +
-                paragraph.repeat(deep + 2) + "\"Location\":\n" +
-                paragraph.repeat(deep + 2) + "{\n" +
-                paragraph.repeat(deep + 4) + "\"x\": " + x + ",\n" +
-                paragraph.repeat(deep + 4) + "\"y\": " + y + ",\n" +
-                paragraph.repeat(deep + 4) + "\"z\": " + z + "\n" +
-                paragraph.repeat(deep + 2) + "}\n" +
-                paragraph.repeat(deep) + "}";
+                new String(new char[deep]).replace("\0", paragraph) + "{\n" +
+                new String(new char[deep + 2]).replace("\0", paragraph) + "\"Location\":\n" +
+                new String(new char[deep + 2]).replace("\0", paragraph) + "{\n" +
+                new String(new char[deep + 4]).replace("\0", paragraph) + "\"x\": " + x + ",\n" +
+                new String(new char[deep + 4]).replace("\0", paragraph) + "\"y\": " + y + ",\n" +
+                new String(new char[deep + 4]).replace("\0", paragraph) + "\"z\": " + z + "\n" +
+                new String(new char[deep + 2]).replace("\0", paragraph) + "}\n" +
+                new String(new char[deep]).replace("\0", paragraph) + "}";
     }
 }

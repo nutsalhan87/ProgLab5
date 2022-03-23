@@ -24,8 +24,5 @@ public class Main {
         catch (IOException ioexc) {
             System.out.println("Нет доступа к файлу");
         }
-        catch (NullPointerException exc) {
-            System.out.println("Данные json некорректны");
-        }
     }
 }

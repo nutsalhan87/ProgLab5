@@ -40,11 +40,8 @@ public class MainInterface {
             try {
                 execCommand(inputLine, data, input);
             }
-            catch (WrongCommand exc) {
+            catch (WrongCommandException exc) {
                 System.out.println(exc.getMessage());
-            } catch (ExitProgramException ext) {
-                System.out.println(ext.getMessage());
-                break;
             } catch (NumberFormatException exn) {
                 System.out.println("В качестве id введите целое число");
             } catch (IOException exf) {
@@ -58,15 +55,14 @@ public class MainInterface {
      * @param command - command
      * @param data - collection of instances of the Route class
      * @param input - lamda-method which implements functional interface Input
-     * @throws WrongCommand - an exception thrown when the command is incorrect
-     * @throws ExitProgramException - the exception required to implement the exit command that exits the program
+     * @throws WrongCommandException - an exception thrown when the command is incorrect
      * @throws NumberFormatException - exception thrown when entering an incorrect number
      * @throws IOException - an exception thrown if there is no access to the file or there are other I/O errors
      */
-    private void execCommand(String command, List<Route> data, Input input) throws WrongCommand, ExitProgramException, NumberFormatException, IOException {
-        List<String> splittedCommand = new LinkedList<>(List.of(command.split("\s+")));
+    private void execCommand(String command, List<Route> data, Input input) throws WrongCommandException, NumberFormatException, IOException {
+        List<String> splittedCommand = new LinkedList<>(Arrays.asList(command.split("\\s+")));
         if (command.equals("") || splittedCommand.size() == 0) {
-            throw new WrongCommand("Введена пустая строка");
+            throw new WrongCommandException("Введена пустая строка");
         }
         if (splittedCommand.get(0).equals("")) {
             splittedCommand.remove(0);
@@ -77,101 +73,103 @@ public class MainInterface {
                 if (splittedCommand.size() == 1)
                     help();
                 else
-                    throw new WrongCommand();
+                    throw new WrongCommandException();
                 break;
             case "info":
                 if (splittedCommand.size() == 1)
                     info(data);
                 else
-                    throw new WrongCommand();
+                    throw new WrongCommandException();
                 break;
             case "show":
                 if (splittedCommand.size() == 1)
                     show(data);
                 else
-                    throw new WrongCommand();
+                    throw new WrongCommandException();
                 break;
             case "add":
                 if (splittedCommand.size() == 2 && splittedCommand.get(1).equals("Route"))
                     add(data, input);
                 else if (splittedCommand.size() == 2 && !splittedCommand.get(1).equals("Route"))
-                    throw new WrongCommand("В коллекцию можно дабовить только объект класса Route");
+                    throw new WrongCommandException("В коллекцию можно дабовить только объект класса Route");
                 else
-                    throw new WrongCommand();
+                    throw new WrongCommandException();
                 break;
             case "update":
                 if (splittedCommand.size() == 2)
                     update(data, splittedCommand.get(1), input);
                 else
-                    throw new WrongCommand();
+                    throw new WrongCommandException();
                 break;
             case "remove_by_id":
                 if (splittedCommand.size() == 2)
                     removeById(data, splittedCommand.get(1));
                 else
-                    throw new WrongCommand();
+                    throw new WrongCommandException();
                 break;
             case "clear":
                 if (splittedCommand.size() == 1)
                     clear(data);
                 else
-                    throw new WrongCommand();
+                    throw new WrongCommandException();
                 break;
             case "save":
                 if(splittedCommand.size() == 1)
                     save(data);
                 else
-                    throw new WrongCommand();
+                    throw new WrongCommandException();
                 break;
             case "execute_script":
                 if (splittedCommand.size() == 2)
                     executeScript(data, splittedCommand.get(1));
                 else
-                    throw new WrongCommand();
+                    throw new WrongCommandException();
                 break;
             case "exit":
-                if (splittedCommand.size() == 1)
-                    throw new ExitProgramException();
+                if (splittedCommand.size() == 1) {
+                    System.out.println("Осуществлен выход из программы. Все несохраненные данные утеряны.");
+                    System.exit(0);
+                }
                 else
-                    throw new WrongCommand();
+                    throw new WrongCommandException();
             case "add_if_max":
                 if (splittedCommand.size() == 2 && splittedCommand.get(1).equals("Route"))
                     addIfMax(data, input);
                 else
-                    throw new WrongCommand();
+                    throw new WrongCommandException();
                 break;
             case "remove_greater":
                 if (splittedCommand.size() == 2 && splittedCommand.get(1).equals("Route"))
                     removeGreater(data, input);
                 else
-                    throw new WrongCommand();
+                    throw new WrongCommandException();
                 break;
             case "remove_lower":
                 if (splittedCommand.size() == 2 && splittedCommand.get(1).equals("Route"))
                     removeLower(data, input);
                 else
-                    throw new WrongCommand();
+                    throw new WrongCommandException();
                 break;
             case "remove_any_by_distance":
                 if (splittedCommand.size() == 2)
                     removeAnyByDistance(data, splittedCommand.get(1));
                 else
-                    throw new WrongCommand();
+                    throw new WrongCommandException();
                 break;
             case "filter_contains_name":
                 if (splittedCommand.size() == 2)
                     filterContainsName(data, splittedCommand.get(1));
                 else
-                    throw new WrongCommand();
+                    throw new WrongCommandException();
                 break;
             case "filter_starts_with_name":
                 if (splittedCommand.size() == 2)
                     filterStartsWithName(data, splittedCommand.get(1));
                 else
-                    throw new WrongCommand();
+                    throw new WrongCommandException();
                 break;
             default:
-                throw new WrongCommand();
+                throw new WrongCommandException();
         }
     }
 

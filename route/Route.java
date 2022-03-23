@@ -147,13 +147,13 @@ public class Route implements Comparable<Route> {
 
     public String toJSON(int deep) {
         String paragraph = " ";
-        return paragraph.repeat(deep) + "\"Route\":\n" +
-                paragraph.repeat(deep) + "{\n" +
-                paragraph.repeat(deep + 2) + "\"name\": \"" + name + "\",\n" +
-                paragraph.repeat(deep + 2) + coordinates.toJSON(deep + 2) + ",\n" +
-                paragraph.repeat(deep + 2) + "\"distance\": " + distance + ",\n" +
-                paragraph.repeat(deep + 2) + from.toJSON(deep + 2) + ",\n" +
-                paragraph.repeat(deep + 2) + to.toJSON(deep + 2) + "\n" +
-                paragraph.repeat(deep) + "}";
+        return new String(new char[deep]).replace("\0", paragraph) + "\"Route\":\n" +
+                new String(new char[deep + 2]).replace("\0", paragraph) + "{\n" +
+                new String(new char[deep + 2]).replace("\0", paragraph) + "\"name\": \"" + name + "\",\n" +
+                new String(new char[deep + 2]).replace("\0", paragraph) + coordinates.toJSON(deep + 2) + ",\n" +
+                new String(new char[deep + 2]).replace("\0", paragraph) + "\"distance\": " + distance + ",\n" +
+                new String(new char[deep + 2]).replace("\0", paragraph) + from.toJSON(deep + 2) + ",\n" +
+                new String(new char[deep + 2]).replace("\0", paragraph) + to.toJSON(deep + 2) + "\n" +
+                new String(new char[deep]).replace("\0", paragraph) + "}";
     }
 }

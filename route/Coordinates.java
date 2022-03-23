@@ -59,9 +59,9 @@ public class Coordinates implements Comparable<Coordinates> {
     public String toJSON(int deep) {
         String paragraph = " ";
         return "\"coordinates\": \n" +
-                paragraph.repeat(deep) + "{\n" +
-                paragraph.repeat(deep + 2) + "\"x\": " + x + ",\n" +
-                paragraph.repeat(deep + 2) + "\"y\": " + y + "\n" +
-                paragraph.repeat(deep) + "}";
+                new String(new char[deep]).replace("\0", paragraph) + "{\n" +
+                new String(new char[deep + 2]).replace("\0", paragraph) + "\"x\": " + x + ",\n" +
+                new String(new char[deep + 2]).replace("\0", paragraph) + "\"y\": " + y + "\n" +
+                new String(new char[deep]).replace("\0", paragraph) + "}";
     }
 }

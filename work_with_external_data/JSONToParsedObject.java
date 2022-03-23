@@ -5,6 +5,7 @@ import work_with_external_data.parsed_objects.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.*;
@@ -28,7 +29,7 @@ public class JSONToParsedObject implements ParseExternalData {
                 break;
             data += input;
         }
-        List<String> splitted = new LinkedList<>(List.of(data.split(",")));
+        List<String> splitted = new LinkedList<>(Arrays.asList(data.split(",")));
         Pattern pattern = Pattern.compile("\\s*(\"\\s*[^\"]*\\s*\":|([^\\s:\\[\\]{}]*[:\\[\\]{}]?))\\n?");
         List<String> blocks = new LinkedList<>();
         for (int i = 0; i < splitted.size(); ++i) {

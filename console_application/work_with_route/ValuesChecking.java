@@ -10,8 +10,8 @@ public class ValuesChecking {
     }
 
     public static String checkCondition(String input, RouteFields field) throws IllegalArgumentException {
-        Matcher matcher = Pattern.compile("\s*([a-z0-9A-Z.-]+)").matcher(input);
-        Pattern numberPattern = Pattern.compile("^\s*(-?[0-9]+(\\.[0-9]+)*)");
+        Matcher matcher = Pattern.compile("\\s*([a-z0-9A-Z.-]+)").matcher(input);
+        Pattern numberPattern = Pattern.compile("^\\s*(-?[0-9]+(\\.[0-9]+)*)");
         boolean isInputNull = !matcher.find();
         switch (field) {
             case R_NAME:
