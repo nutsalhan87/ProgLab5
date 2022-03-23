@@ -73,7 +73,7 @@ public class Location implements Comparable<route.second_location.Location> {
                 paragraph.repeat(deep + 2) + "{\n" +
                 paragraph.repeat(deep + 4) + "\"x\": " + x + ",\n" +
                 paragraph.repeat(deep + 4) + "\"y\": " + y + ",\n" +
-                paragraph.repeat(deep + 4) + "\"y\": " + z + "\n" +
+                paragraph.repeat(deep + 4) + "\"z\": " + z + "\n" +
                 paragraph.repeat(deep + 2) + "}\n" +
                 paragraph.repeat(deep) + "}";
     }

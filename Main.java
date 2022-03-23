@@ -15,10 +15,17 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String args[]) throws IOException {
-        ParsedObject parsedObject = new JSONToParsedObject().parseFile(System.getenv("Lab5Data"));
-        List<Route> data = new LinkedList<>(ParsedObjectToListRoute.convertToListRoute(parsedObject));
-
-        MainInterface mainInterface = new MainInterface();
-        mainInterface.startMainInterface(data, () -> new Scanner(System.in).nextLine());
+        try {
+            ParsedObject parsedObject = new JSONToParsedObject().parseFile(System.getenv("Lab5Data"));
+            List<Route> data = new LinkedList<>(ParsedObjectToListRoute.convertToListRoute(parsedObject));
+            MainInterface mainInterface = new MainInterface();
+            mainInterface.startMainInterface(data, () -> new Scanner(System.in).nextLine());
+        }
+        catch (IOException ioexc) {
+            System.out.println("Нет доступа к файлу");
+        }
+        catch (NullPointerException exc) {
+            System.out.println("Данные json некорректны");
+        }
     }
 }

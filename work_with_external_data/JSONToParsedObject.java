@@ -3,7 +3,6 @@ package work_with_external_data;
 import work_with_external_data.parsed_objects.*;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedList;
@@ -30,7 +29,7 @@ public class JSONToParsedObject implements ParseExternalData {
             data += input;
         }
         List<String> splitted = new LinkedList<>(List.of(data.split(",")));
-        Pattern pattern = Pattern.compile("\\s*([^\\s:\\[\\]{}]*[:\\[\\]{}]?)\\n?");
+        Pattern pattern = Pattern.compile("\\s*(\"\\s*[^\"]*\\s*\":|([^\\s:\\[\\]{}]*[:\\[\\]{}]?))\\n?");
         List<String> blocks = new LinkedList<>();
         for (int i = 0; i < splitted.size(); ++i) {
             Matcher matcher = pattern.matcher(splitted.get(i));
@@ -39,9 +38,8 @@ public class JSONToParsedObject implements ParseExternalData {
         }
 
         int[] index = {1};
-        ParsedObject parsedObject = parseList(blocks, index);
 
-        return parsedObject;
+        return parseList(blocks, index);
     }
 
     public ParsedList parseList(List<String> blocks, int[] index) {
@@ -114,9 +112,11 @@ public class JSONToParsedObject implements ParseExternalData {
     }
 
     public String parseString(String block) {
-        Pattern pattern = Pattern.compile("\"(.*)\"");
+        Pattern pattern = Pattern.compile("\"(\\s*.*\\s*)\"");
         Matcher matcher = pattern.matcher(block);
-        matcher.find();
-        return matcher.group(1);
+        if(matcher.find())
+            return matcher.group(1);
+        else
+            throw new NullPointerException();
     }
 }

@@ -10,5 +10,5 @@ import java.util.List;
  */
 
 public interface SaveData<T> {
-    void saveInFile(String path, List<T> data) throws IOException;
+    void saveInFile(List<T> data) throws IOException;
 }

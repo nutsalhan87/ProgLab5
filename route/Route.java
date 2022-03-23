@@ -149,7 +149,7 @@ public class Route implements Comparable<Route> {
         String paragraph = " ";
         return paragraph.repeat(deep) + "\"Route\":\n" +
                 paragraph.repeat(deep) + "{\n" +
-                paragraph.repeat(deep + 2) + "\"name\": " + name + ",\n" +
+                paragraph.repeat(deep + 2) + "\"name\": \"" + name + "\",\n" +
                 paragraph.repeat(deep + 2) + coordinates.toJSON(deep + 2) + ",\n" +
                 paragraph.repeat(deep + 2) + "\"distance\": " + distance + ",\n" +
                 paragraph.repeat(deep + 2) + from.toJSON(deep + 2) + ",\n" +

@@ -17,21 +17,25 @@ public class ListRouteToFileJSON implements SaveData<Route> {
     public ListRouteToFileJSON() {}
 
     @Override
-    public void saveInFile(String path, List<Route> data) throws IOException {
-        File file = new File(path, "savedData.txt");
-        file.createNewFile();
-        FileWriter writer = new FileWriter(file);
+    public void saveInFile(List<Route> data) throws IOException {
+        try {
+            File file = new File(System.getenv("Lab5Data"));
+            FileWriter writer = new FileWriter(file);
 
-        writer.write("[\n");
-        String json;
-        for(int i = 0; i < data.size(); ++i) {
-            if(i != data.size() - 1)
-                json = "  {\n" + data.get(i).toJSON(4) + "\n  },\n";
-            else
-                json = "  {\n" + data.get(i).toJSON(4) + "\n  }\n";
-            writer.write(json);
+            writer.write("[\n");
+            String json;
+            for(int i = 0; i < data.size(); ++i) {
+                if(i != data.size() - 1)
+                    json = "  {\n" + data.get(i).toJSON(4) + "\n  },\n";
+                else
+                    json = "  {\n" + data.get(i).toJSON(4) + "\n  }\n";
+                writer.write(json);
+            }
+            writer.write("]");
+            writer.close();
         }
-        writer.write("]");
-        writer.close();
+        catch (IOException exc) {
+            System.out.println("Нет доступа к файлу");
+        }
     }
 }

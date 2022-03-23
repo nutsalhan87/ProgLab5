@@ -39,9 +39,10 @@ public class MainInterface {
 
             try {
                 execCommand(inputLine, data, input);
-            } catch (WrongCommand exc) {
+            }
+            catch (WrongCommand exc) {
                 System.out.println(exc.getMessage());
-            } catch (ExitProgram ext) {
+            } catch (ExitProgramException ext) {
                 System.out.println(ext.getMessage());
                 break;
             } catch (NumberFormatException exn) {
@@ -58,14 +59,14 @@ public class MainInterface {
      * @param data - collection of instances of the Route class
      * @param input - lamda-method which implements functional interface Input
      * @throws WrongCommand - an exception thrown when the command is incorrect
-     * @throws ExitProgram - the exception required to implement the exit command that exits the program
+     * @throws ExitProgramException - the exception required to implement the exit command that exits the program
      * @throws NumberFormatException - exception thrown when entering an incorrect number
      * @throws IOException - an exception thrown if there is no access to the file or there are other I/O errors
      */
-    private void execCommand(String command, List<Route> data, Input input) throws WrongCommand, ExitProgram, NumberFormatException, IOException {
+    private void execCommand(String command, List<Route> data, Input input) throws WrongCommand, ExitProgramException, NumberFormatException, IOException {
         List<String> splittedCommand = new LinkedList<>(List.of(command.split("\s+")));
         if (command.equals("") || splittedCommand.size() == 0) {
-            throw new IllegalArgumentException("Введена пустая строка");
+            throw new WrongCommand("Введена пустая строка");
         }
         if (splittedCommand.get(0).equals("")) {
             splittedCommand.remove(0);
@@ -130,7 +131,7 @@ public class MainInterface {
                 break;
             case "exit":
                 if (splittedCommand.size() == 1)
-                    throw new ExitProgram();
+                    throw new ExitProgramException();
                 else
                     throw new WrongCommand();
             case "add_if_max":
@@ -262,7 +263,7 @@ public class MainInterface {
      * Сохранение элементов коллекции в файл в виде данных в формате JSON
      */
     private void save(List<Route> data) throws IOException {
-        new ListRouteToFileJSON().saveInFile("C:\\Users\\nutsa\\Desktop", data);
+        new ListRouteToFileJSON().saveInFile(data);
         System.out.println("Коллекция сохранена в файл");
     }
 
