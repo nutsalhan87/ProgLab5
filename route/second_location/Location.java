@@ -21,7 +21,7 @@ public class Location implements Comparable<route.second_location.Location> {
 
     public void setX(Integer x) {
         if (x == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Неверные данные для объекта Location");
         }
 
         this.x = x;

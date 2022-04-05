@@ -17,6 +17,26 @@ public class Route implements Comparable<Route> {
     private static int instances = 0;
 
     public Route(String name, Coordinates coordinates, route.first_location.Location from,
+                 route.second_location.Location to, double distance, Integer id) throws IllegalArgumentException {
+        if (name == null || coordinates == null || from == null || to == null || name.equals("") || distance <= 1d) {
+            throw new IllegalArgumentException("Неверные данные для объекта Route");
+        }
+
+        this.name = name;
+        this.coordinates = coordinates;
+        this.from = from;
+        this.to = to;
+        this.distance = distance;
+        creationDate = new java.util.Date();
+
+        if(id <= instances) {
+            throw new IllegalArgumentException("Создать объект невозможно. Имеется пересечение id.");
+        }
+        this.id = id;
+        instances = id;
+    }
+
+    public Route(String name, Coordinates coordinates, route.first_location.Location from,
                  route.second_location.Location to, double distance) throws IllegalArgumentException {
         if (name == null || coordinates == null || from == null || to == null || name.equals("") || distance <= 1d) {
             throw new IllegalArgumentException();
@@ -149,6 +169,7 @@ public class Route implements Comparable<Route> {
         String paragraph = " ";
         return new String(new char[deep]).replace("\0", paragraph) + "\"Route\":\n" +
                 new String(new char[deep + 2]).replace("\0", paragraph) + "{\n" +
+                new String(new char[deep + 2]).replace("\0", paragraph) + "\"id\": " + id + ",\n" +
                 new String(new char[deep + 2]).replace("\0", paragraph) + "\"name\": \"" + name + "\",\n" +
                 new String(new char[deep + 2]).replace("\0", paragraph) + coordinates.toJSON(deep + 2) + ",\n" +
                 new String(new char[deep + 2]).replace("\0", paragraph) + "\"distance\": " + distance + ",\n" +

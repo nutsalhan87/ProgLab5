@@ -24,7 +24,10 @@ public class ParsedObjectToListRoute {
                 data.add(extractRouteObject(parsedObject, i));
             }
             catch (NullPointerException exc) {
-                System.out.println("Один из объектов не может быть добавлен вследствие некорреткных данных.");
+                System.out.println("Объект под номером " + (i + 1) + " не может быть добавлен вследствие некорреткных данных.");
+            }
+            catch (IllegalArgumentException exci) {
+                System.out.println(exci.getMessage());
             }
         }
 
@@ -59,12 +62,15 @@ public class ParsedObjectToListRoute {
                         asMap().get("second_location").asMap().get("Location").asMap().get("z").asNumber().floatValue()
         );
 
+        Integer id = parsedObject.asList().get(i).asMap().get("Route").asMap().get("id").asNumber().intValue();
+
         return new Route(
                 parsedObject.asList().get(i).asMap().get("Route").asMap().get("name").asString(),
                 coordinates,
                 from,
                 to,
-                parsedObject.asList().get(i).asMap().get("Route").asMap().get("distance").asNumber()
+                parsedObject.asList().get(i).asMap().get("Route").asMap().get("distance").asNumber(),
+                id
         );
     }
 }

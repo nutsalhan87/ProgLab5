@@ -12,7 +12,7 @@ public class Location implements Comparable<route.first_location.Location> {
 
     public Location(double x, Long y, double z, String name) {
         if (y == null || name == null || name.equals("")) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Неверные данные для объекта Location");
         }
 
         this.x = x;

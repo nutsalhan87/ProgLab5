@@ -30,7 +30,7 @@ public class JSONToParsedObject implements ParseExternalData {
             data += input;
         }
         List<String> splitted = new LinkedList<>(Arrays.asList(data.split(",")));
-        Pattern pattern = Pattern.compile("\\s*(\"\\s*[^\"]*\\s*\":|([^\\s:\\[\\]{}]*[:\\[\\]{}]?))\\n?");
+        Pattern pattern = Pattern.compile("\\s*(\\\"\\s*[^\\\"]*\\s*\\\":|(\\\"\\s*[^\\\"]*\\s*\\\"|[^\\s:\\[\\]{}]*[:\\[\\]{}]?))\\n?");
         List<String> blocks = new LinkedList<>();
         for (int i = 0; i < splitted.size(); ++i) {
             Matcher matcher = pattern.matcher(splitted.get(i));
@@ -118,6 +118,6 @@ public class JSONToParsedObject implements ParseExternalData {
         if(matcher.find())
             return matcher.group(1);
         else
-            throw new NullPointerException();
+            return "";
     }
 }

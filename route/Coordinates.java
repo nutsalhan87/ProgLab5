@@ -10,7 +10,7 @@ public class Coordinates implements Comparable<Coordinates> {
 
     public Coordinates(double x, Integer y) {
         if (x <= -140 || y == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Неверные данные для объекта Coordinates");
         }
 
         this.x = x;
