@@ -1,4 +1,4 @@
-package console_application;
+package consoleapplication;
 
 /**
  * An exception class that describes an exception that is called if an invalid command is submitted for processing

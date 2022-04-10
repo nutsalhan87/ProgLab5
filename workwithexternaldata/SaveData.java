@@ -1,5 +1,6 @@
-package work_with_external_data;
+package workwithexternaldata;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -10,5 +11,5 @@ import java.util.List;
  */
 
 public interface SaveData<T> {
-    void saveInFile(List<T> data) throws IOException;
+    void saveInFile(List<T> data, File file) throws IOException;
 }

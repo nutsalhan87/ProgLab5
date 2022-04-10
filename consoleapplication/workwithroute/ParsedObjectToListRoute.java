@@ -1,8 +1,9 @@
-package console_application.work_with_route;
+package consoleapplication.workwithroute;
 
 import route.Coordinates;
 import route.Route;
-import work_with_external_data.parsed_objects.ParsedObject;
+import route.location.second.Location;
+import workwithexternaldata.parsedobjects.ParsedObject;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -42,7 +43,7 @@ public class ParsedObjectToListRoute {
                         asMap().get("coordinates").asMap().get("y").asNumber().intValue()
         );
 
-        route.first_location.Location from = new route.first_location.Location(
+        route.location.first.Location from = new route.location.first.Location(
                 parsedObject.asList().get(i).asMap().get("Route").
                         asMap().get("first_location").asMap().get("Location").asMap().get("x").asNumber(),
                 parsedObject.asList().get(i).asMap().get("Route").
@@ -53,7 +54,7 @@ public class ParsedObjectToListRoute {
                         asMap().get("first_location").asMap().get("Location").asMap().get("name").asString()
         );
 
-        route.second_location.Location to = new route.second_location.Location(
+        Location to = new Location(
                 parsedObject.asList().get(i).asMap().get("Route").
                         asMap().get("second_location").asMap().get("Location").asMap().get("x").asNumber().intValue(),
                 parsedObject.asList().get(i).asMap().get("Route").

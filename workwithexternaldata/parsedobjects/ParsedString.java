@@ -1,4 +1,4 @@
-package work_with_external_data.parsed_objects;
+package workwithexternaldata.parsedobjects;
 
 /**
  * A special class whose objects store parsing data in the form of strings

@@ -1,4 +1,4 @@
-package work_with_external_data.parsed_objects;
+package workwithexternaldata.parsedobjects;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,7 +1,8 @@
-package console_application;
+package consoleapplication;
 
-import console_application.work_with_route.CreatingNewInstance;
-import console_application.work_with_route.ListRouteToFileJSON;
+import com.sun.javafx.scene.traversal.SubSceneTraversalEngine;
+import consoleapplication.workwithroute.ListRouteToFileJSON;
+import consoleapplication.workwithroute.CreatingNewInstance;
 import route.Route;
 
 import java.io.*;
@@ -44,8 +45,8 @@ public class MainInterface {
                 System.out.println(exc.getMessage());
             } catch (NumberFormatException exn) {
                 System.out.println("В качестве id введите целое число");
-            } catch (IOException exf) {
-                System.out.println("Файл не найден, попробуйте снова");
+            } catch (IOException ioexc) {
+                System.out.println("Файл скрипта недоступен.");
             }
         }
     }
@@ -69,101 +70,85 @@ public class MainInterface {
         }
 
         switch (splittedCommand.get(0)) {
-            case "help":
-                if (splittedCommand.size() == 1)
-                    help();
-                else
-                    throw new WrongCommandException();
+            case Commands.HELP:
+                help();
                 break;
-            case "info":
-                if (splittedCommand.size() == 1)
-                    info(data);
-                else
-                    throw new WrongCommandException();
+            case Commands.INFO:
+                info(data);
                 break;
-            case "show":
-                if (splittedCommand.size() == 1)
-                    show(data);
-                else
-                    throw new WrongCommandException();
+            case Commands.SHOW:
+                show(data);
                 break;
-            case "add":
-                if (splittedCommand.size() == 2 && splittedCommand.get(1).equals("Route"))
+            case Commands.ADD:
+                if (splittedCommand.size() >= 2 && splittedCommand.get(1).equals("Route"))
                     add(data, input);
-                else if (splittedCommand.size() == 2 && !splittedCommand.get(1).equals("Route"))
-                    throw new WrongCommandException("В коллекцию можно дабовить только объект класса Route");
                 else
-                    throw new WrongCommandException();
+                    throw new WrongCommandException("В коллекцию можно дабовить только объект класса Route");
                 break;
-            case "update":
-                if (splittedCommand.size() == 2)
+            case Commands.UPDATE:
+                if (splittedCommand.size() >= 2)
                     update(data, splittedCommand.get(1), input);
                 else
                     throw new WrongCommandException();
                 break;
-            case "remove_by_id":
-                if (splittedCommand.size() == 2)
+            case Commands.REMOVE_BY_ID:
+                if (splittedCommand.size() >= 2)
                     removeById(data, splittedCommand.get(1));
                 else
                     throw new WrongCommandException();
                 break;
-            case "clear":
-                if (splittedCommand.size() == 1)
-                    clear(data);
-                else
-                    throw new WrongCommandException();
+            case Commands.CLEAR:
+                clear(data);
                 break;
-            case "save":
-                if(splittedCommand.size() == 1)
-                    save(data);
-                else
-                    throw new WrongCommandException();
+            case Commands.SAVE:
+                try {
+                    save(data, input);
+                }
+                catch (IOException exc) {
+                    System.out.println("Файл недоступен");
+                }
                 break;
-            case "execute_script":
-                if (splittedCommand.size() == 2)
+            case Commands.EXECUTE_SCRIPT:
+                if (splittedCommand.size() >= 2)
                     executeScript(data, splittedCommand.get(1));
                 else
                     throw new WrongCommandException();
                 break;
-            case "exit":
-                if (splittedCommand.size() == 1) {
-                    System.out.println("Осуществлен выход из программы. Все несохраненные данные утеряны.");
-                    System.exit(0);
-                }
-                else
-                    throw new WrongCommandException();
-            case "add_if_max":
-                if (splittedCommand.size() == 2 && splittedCommand.get(1).equals("Route"))
+            case Commands.EXIT:
+                System.out.println("Осуществлен выход из программы. Все несохраненные данные утеряны.");
+                System.exit(0);
+            case Commands.ADD_IF_MAX:
+                if (splittedCommand.size() >= 2 && splittedCommand.get(1).equals("Route"))
                     addIfMax(data, input);
                 else
-                    throw new WrongCommandException();
+                    System.out.println("Программа поддерживает только работу с Route");
                 break;
-            case "remove_greater":
-                if (splittedCommand.size() == 2 && splittedCommand.get(1).equals("Route"))
+            case Commands.REMOVE_GREATER:
+                if (splittedCommand.size() >= 2 && splittedCommand.get(1).equals("Route"))
                     removeGreater(data, input);
                 else
-                    throw new WrongCommandException();
+                    System.out.println("Программа поддерживает только работу с Route");
                 break;
-            case "remove_lower":
-                if (splittedCommand.size() == 2 && splittedCommand.get(1).equals("Route"))
+            case Commands.REMOVE_LOWER:
+                if (splittedCommand.size() >= 2 && splittedCommand.get(1).equals("Route"))
                     removeLower(data, input);
                 else
-                    throw new WrongCommandException();
+                    System.out.println("Программа поддерживает только работу с Route");
                 break;
-            case "remove_any_by_distance":
-                if (splittedCommand.size() == 2)
+            case Commands.REMOVE_ANY_BY_DISTANCE:
+                if (splittedCommand.size() >= 2)
                     removeAnyByDistance(data, splittedCommand.get(1));
                 else
                     throw new WrongCommandException();
                 break;
-            case "filter_contains_name":
-                if (splittedCommand.size() == 2)
+            case Commands.FILTER_CONTAINS_NAME:
+                if (splittedCommand.size() >= 2)
                     filterContainsName(data, splittedCommand.get(1));
                 else
                     throw new WrongCommandException();
                 break;
-            case "filter_starts_with_name":
-                if (splittedCommand.size() == 2)
+            case Commands.FILTER_STARTS_WITH_NAME:
+                if (splittedCommand.size() >= 2)
                     filterStartsWithName(data, splittedCommand.get(1));
                 else
                     throw new WrongCommandException();
@@ -260,8 +245,26 @@ public class MainInterface {
     /**
      * Сохранение элементов коллекции в файл в виде данных в формате JSON
      */
-    private void save(List<Route> data) throws IOException {
-        new ListRouteToFileJSON().saveInFile(data);
+    private void save(List<Route> data, Input input) throws IOException {
+        try {
+            new ListRouteToFileJSON().saveInFile(data, new File(System.getenv("Lab5Data")));
+        }
+        catch (IOException excio) {
+            File path = new File("");
+            do {
+                System.out.println("Введите путь до директории, где будет храниться Data.json или где уже хранится таковая:");
+                path = new File(input.nextLine());
+                if(!path.exists()) {
+                    System.out.println("Такой директории не существует");
+                    continue;
+                }
+                path = new File(path.getAbsolutePath() + "\\Data.json");
+                path.createNewFile();
+                if (!path.canWrite())
+                    System.out.println("В данной директории невозможно произвести запись в файл");
+            } while (!path.canWrite());
+            new ListRouteToFileJSON().saveInFile(data, path);
+        }
         System.out.println("Коллекция сохранена в файл");
     }
 

@@ -1,4 +1,4 @@
-package console_application;
+package consoleapplication;
 
 import java.io.IOException;
 

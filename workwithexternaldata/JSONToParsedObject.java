@@ -1,6 +1,6 @@
-package work_with_external_data;
+package workwithexternaldata;
 
-import work_with_external_data.parsed_objects.*;
+import workwithexternaldata.parsedobjects.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

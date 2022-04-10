@@ -1,4 +1,4 @@
-package console_application.work_with_route;
+package consoleapplication.workwithroute;
 
 import java.util.regex.*;
 

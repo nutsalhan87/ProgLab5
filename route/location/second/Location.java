@@ -1,10 +1,10 @@
-package route.second_location;
+package route.location.second;
 
 /**
  * The class stores coordinates in three-dimensional space
  */
 
-public class Location implements Comparable<route.second_location.Location> {
+public class Location implements Comparable<Location> {
     private Integer x; //Поле не может быть null
     private int y;
     private float z;
@@ -48,7 +48,7 @@ public class Location implements Comparable<route.second_location.Location> {
     }
 
     @Override
-    public int compareTo(route.second_location.Location anotherLoc) {
+    public int compareTo(Location anotherLoc) {
         double coordModule1 = Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2) + Math.pow(this.z, 2));
         double coordModule2 = Math.sqrt(Math.pow(anotherLoc.x, 2) + Math.pow(anotherLoc.y, 2) + Math.pow(anotherLoc.z, 2));
 

@@ -1,5 +1,7 @@
 package route;
 
+import route.location.second.Location;
+
 /**
  * The Route class is designed to store route data and contains data such as name, coordinates, distance,
  * start and end locations, as well as a unique identifier and the date of creation of the object
@@ -10,14 +12,14 @@ public class Route implements Comparable<Route> {
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
     private java.util.Date creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
-    private route.first_location.Location from; //Поле не может быть null
-    private route.second_location.Location to; //Поле не может быть null
+    private route.location.first.Location from; //Поле не может быть null
+    private Location to; //Поле не может быть null
     private double distance; //Значение поля должно быть больше 1
 
     private static int instances = 0;
 
-    public Route(String name, Coordinates coordinates, route.first_location.Location from,
-                 route.second_location.Location to, double distance, Integer id) throws IllegalArgumentException {
+    public Route(String name, Coordinates coordinates, route.location.first.Location from,
+                 Location to, double distance, Integer id) throws IllegalArgumentException {
         if (name == null || coordinates == null || from == null || to == null || name.equals("") || distance <= 1d) {
             throw new IllegalArgumentException("Неверные данные для объекта Route");
         }
@@ -36,8 +38,8 @@ public class Route implements Comparable<Route> {
         instances = id;
     }
 
-    public Route(String name, Coordinates coordinates, route.first_location.Location from,
-                 route.second_location.Location to, double distance) throws IllegalArgumentException {
+    public Route(String name, Coordinates coordinates, route.location.first.Location from,
+                 Location to, double distance) throws IllegalArgumentException {
         if (name == null || coordinates == null || from == null || to == null || name.equals("") || distance <= 1d) {
             throw new IllegalArgumentException();
         }
@@ -82,7 +84,7 @@ public class Route implements Comparable<Route> {
         this.coordinates = coordinates;
     }
 
-    public void setFrom(route.first_location.Location from) {
+    public void setFrom(route.location.first.Location from) {
         if (from == null) {
             throw new IllegalArgumentException();
         }
@@ -90,7 +92,7 @@ public class Route implements Comparable<Route> {
         this.from = from;
     }
 
-    public void setTo(route.second_location.Location to) {
+    public void setTo(Location to) {
         if (to == null) {
             throw new IllegalArgumentException();
         }
@@ -122,11 +124,11 @@ public class Route implements Comparable<Route> {
         return creationDate;
     }
 
-    public route.first_location.Location getFrom() {
+    public route.location.first.Location getFrom() {
         return from;
     }
 
-    public route.second_location.Location getTo() {
+    public Location getTo() {
         return to;
     }
 

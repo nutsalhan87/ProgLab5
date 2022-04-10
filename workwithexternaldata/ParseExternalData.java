@@ -1,6 +1,6 @@
-package work_with_external_data;
+package workwithexternaldata;
 
-import work_with_external_data.parsed_objects.ParsedObject;
+import workwithexternaldata.parsedobjects.ParsedObject;
 
 import java.io.IOException;
 

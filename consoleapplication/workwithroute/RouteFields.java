@@ -1,4 +1,4 @@
-package console_application.work_with_route;
+package consoleapplication.workwithroute;
 
 /**
  * An enumeration class that stores the code names of all the fields of the Route class and its classes, the objects of which Route stores
