@@ -248,7 +248,7 @@ public class MainInterface {
         try {
             new ListRouteToFileJSON().saveInFile(data, new File(System.getenv("Lab5Data")));
         }
-        catch (IOException excio) {
+        catch (NullPointerException | IOException exnp) {
             File path = new File("");
             do {
                 System.out.println("Введите путь до директории, где будет храниться Data.json или где уже хранится таковая:");
