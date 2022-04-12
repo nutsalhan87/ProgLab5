@@ -1,6 +1,5 @@
 package consoleapplication;
 
-import com.sun.javafx.scene.traversal.SubSceneTraversalEngine;
 import consoleapplication.workwithroute.ListRouteToFileJSON;
 import consoleapplication.workwithroute.CreatingNewInstance;
 import route.Route;
