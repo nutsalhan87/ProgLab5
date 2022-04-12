@@ -15,7 +15,8 @@ import java.util.Scanner;
  */
 
 public class Main {
-    public static void main(String args[]) throws IOException {
+    public static void main(String[] args) throws IOException {
+        List<Route> data = new LinkedList<>();
         try {
             if (!(new File(System.getenv("Lab5Data")).exists())) {
                 System.out.println("Файла данных не существует");
@@ -25,13 +26,13 @@ public class Main {
                 System.out.println("Ввод или вывод в данный файл не доступен.");
                 return;
             }
+            ParsedObject parsedObject = new JSONToParsedObject().parseFile(System.getenv("Lab5Data"));
+            data = ParsedObjectToListRoute.convertToListRoute(parsedObject);
         }
         catch (NullPointerException exc) {
             System.out.println("Заданная переменная окружения отсутствует");
         }
 
-        ParsedObject parsedObject = new JSONToParsedObject().parseFile(System.getenv("Lab5Data"));
-        List<Route> data = new LinkedList<>(ParsedObjectToListRoute.convertToListRoute(parsedObject));
         MainInterface mainInterface = new MainInterface();
         mainInterface.startMainInterface(data, () -> new Scanner(System.in).nextLine());
     }
