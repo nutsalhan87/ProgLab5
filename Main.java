@@ -21,13 +21,13 @@ public class Main {
                 System.out.println("Файла данных не существует");
                 return;
             }
+            if ( !(new File(System.getenv("Lab5Data")).canWrite() && new File(System.getenv("Lab5Data")).canRead())) {
+                System.out.println("Ввод или вывод в данный файл не доступен.");
+                return;
+            }
         }
         catch (NullPointerException exc) {
             System.out.println("Заданная переменная окружения отсутствует");
-        }
-        if ( !(new File(System.getenv("Lab5Data")).canWrite() && new File(System.getenv("Lab5Data")).canRead())) {
-            System.out.println("Ввод или вывод в данный файл не доступен.");
-            return;
         }
 
         ParsedObject parsedObject = new JSONToParsedObject().parseFile(System.getenv("Lab5Data"));
