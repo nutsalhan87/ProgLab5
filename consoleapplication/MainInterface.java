@@ -257,7 +257,8 @@ public class MainInterface {
                     System.out.println("Такой директории не существует");
                     continue;
                 }
-                path = new File(path.getAbsolutePath() + "\\Data.json");
+                System.out.println(path.getAbsolutePath());
+                path = new File(path.getAbsolutePath() + "/Data.json");
                 path.createNewFile();
                 if (!path.canWrite())
                     System.out.println("В данной директории невозможно произвести запись в файл");
