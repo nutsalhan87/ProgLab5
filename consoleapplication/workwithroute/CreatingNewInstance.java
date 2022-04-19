@@ -26,6 +26,7 @@ public class CreatingNewInstance {
         Double rDistance = inputNumber(cin, RouteFields.R_DISTANCE);
 
         System.out.println("Задание основных значений полей для объекта класса Coordinates:");
+        System.out.print("Введите значение x: ");
         Double cX = inputNumber(cin, RouteFields.C_X);
         System.out.print("Введите значение y: ");
         Integer cY = inputNumber(cin, RouteFields.C_Y).intValue();
