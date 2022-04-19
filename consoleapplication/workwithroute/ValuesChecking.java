@@ -22,7 +22,7 @@ public class ValuesChecking {
             case R_DISTANCE:
                 matcher = numberPattern.matcher(input);
                 if (matcher.find()) {
-                    if (Double.parseDouble(matcher.group(1)) >= 1D)
+                    if (Double.parseDouble(matcher.group(1)) > 1D)
                         return matcher.group(1);
                     else
                         throw new IllegalArgumentException("Значение должно превышать 1");
