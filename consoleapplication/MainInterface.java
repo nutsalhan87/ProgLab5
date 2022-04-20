@@ -14,10 +14,13 @@ import java.util.*;
  */
 
 public class MainInterface {
+    static int nestingLevel = 0;
+
     /**
      * Main constructor
      */
     public MainInterface() {
+        nestingLevel++;
     }
 
     /**
@@ -26,14 +29,24 @@ public class MainInterface {
      * @param input - lamda-method which implements functional interface Input
      */
     public void startMainInterface(List<Route> data, Input input) {
+        if(nestingLevel == 2)
+        {
+            System.out.println("Нельзя вызвать один скрипт внутри другого или даже того же скрипта");
+            --nestingLevel;
+            return;
+        }
         String inputLine;
         while (true) {
             try {
                 inputLine = input.nextLine();
                 if (inputLine == null)
+                {
+                    --nestingLevel;
                     return;
+                }
             } catch (IOException exio) {
                 System.out.println("Такого файла нет");
+                --nestingLevel;
                 return;
             }
 
