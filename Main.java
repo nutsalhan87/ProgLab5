@@ -20,21 +20,22 @@ public class Main {
         List<Route> data = new LinkedList<>();
         try {
             if (!(new File(System.getenv("Lab5Data")).exists())) {
-                System.out.println("Файла данных не существует");
-                return;
+                throw new RuntimeException("Файла данных не существует");
             }
             if ( !(new File(System.getenv("Lab5Data")).canWrite() && new File(System.getenv("Lab5Data")).canRead())) {
-                System.out.println("Ввод или вывод в данный файл не доступен.");
-                return;
+                throw new RuntimeException("Ввод или вывод в данный файл не доступен");
             }
             ParsedObject parsedObject = new JSONToParsedObject().parseFile(System.getenv("Lab5Data"));
             data = ParsedObjectToListRoute.convertToListRoute(parsedObject);
         }
-        catch (NullPointerException exc) {
+        catch (NullPointerException exn) {
             System.out.println("Заданная переменная окружения отсутствует");
         }
         catch (FileNotFoundException fnf) {
             System.out.println("Файл недоступен");
+        }
+        catch (RuntimeException exc) {
+            System.out.println(exc.getMessage());
         }
 
         MainInterface mainInterface = new MainInterface();
