@@ -5,6 +5,7 @@ import workwithexternaldata.JSONToParsedObject;
 import workwithexternaldata.parsedobjects.ParsedObject;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
@@ -31,6 +32,9 @@ public class Main {
         }
         catch (NullPointerException exc) {
             System.out.println("Заданная переменная окружения отсутствует");
+        }
+        catch (FileNotFoundException fnf) {
+            System.out.println("Файл недоступен");
         }
 
         MainInterface mainInterface = new MainInterface();

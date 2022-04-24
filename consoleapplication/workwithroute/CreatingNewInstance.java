@@ -31,7 +31,7 @@ public class CreatingNewInstance {
         System.out.print("Введите значение y: ");
         Integer cY = inputNumber(cin, RouteFields.C_Y).intValue();
 
-        System.out.println("Задание основных значений полей для объекта класса route.first_location.Location:");
+        System.out.println("Задание основных значений полей для объекта класса route.location.first.Location:");
         System.out.print("Введите значение x: ");
         Double flX = inputNumber(cin, RouteFields.FL_X);
         System.out.print("Введите значение y: ");
@@ -41,7 +41,7 @@ public class CreatingNewInstance {
         System.out.print("Введите имя: ");
         String flName = inputString(cin, RouteFields.FL_NAME);
 
-        System.out.println("Задание основных значений полей для объекта класса route.second_location.Location:");
+        System.out.println("Задание основных значений полей для объекта класса route.location.second.Location:");
         System.out.print("Введите значение x: ");
         Integer slX = inputNumber(cin, RouteFields.SL_X).intValue();
         System.out.print("Введите значение y: ");

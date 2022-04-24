@@ -9,7 +9,8 @@ import java.util.*;
 
 /**
  * A class that implements a console interface for data management
- * @author Nutsalhan Nutsalhanov
+ *
+ * @author Nutsalkhan Nutsalkhanov
  * @version 1.0
  */
 
@@ -25,12 +26,12 @@ public class MainInterface {
 
     /**
      * The method launches a console interface for data management
-     * @param data - collection of instances of the Route class
+     *
+     * @param data  - collection of instances of the Route class
      * @param input - lamda-method which implements functional interface Input
      */
     public void startMainInterface(List<Route> data, Input input) {
-        if(nestingLevel == 2)
-        {
+        if (nestingLevel == 2) {
             System.out.println("Нельзя вызвать один скрипт внутри другого или даже того же скрипта");
             --nestingLevel;
             return;
@@ -39,8 +40,7 @@ public class MainInterface {
         while (true) {
             try {
                 inputLine = input.nextLine();
-                if (inputLine == null)
-                {
+                if (inputLine == null) {
                     --nestingLevel;
                     return;
                 }
@@ -52,8 +52,7 @@ public class MainInterface {
 
             try {
                 execCommand(inputLine, data, input);
-            }
-            catch (WrongCommandException exc) {
+            } catch (WrongCommandException exc) {
                 System.out.println(exc.getMessage());
             } catch (NumberFormatException exn) {
                 System.out.println("В качестве id введите целое число");
@@ -65,12 +64,13 @@ public class MainInterface {
 
     /**
      * The method is responsible for processing and executing commands
+     *
      * @param command - command
-     * @param data - collection of instances of the Route class
-     * @param input - lamda-method which implements functional interface Input
+     * @param data    - collection of instances of the Route class
+     * @param input   - lamda-method which implements functional interface Input
      * @throws WrongCommandException - an exception thrown when the command is incorrect
      * @throws NumberFormatException - exception thrown when entering an incorrect number
-     * @throws IOException - an exception thrown if there is no access to the file or there are other I/O errors
+     * @throws IOException           - an exception thrown if there is no access to the file or there are other I/O errors
      */
     private void execCommand(String command, List<Route> data, Input input) throws WrongCommandException, NumberFormatException, IOException {
         List<String> splittedCommand = new LinkedList<>(Arrays.asList(command.split("\\s+")));
@@ -115,8 +115,7 @@ public class MainInterface {
             case Commands.SAVE:
                 try {
                     save(data, input);
-                }
-                catch (IOException exc) {
+                } catch (IOException exc) {
                     System.out.println("Файл недоступен");
                 }
                 break;
@@ -260,13 +259,12 @@ public class MainInterface {
     private void save(List<Route> data, Input input) throws IOException {
         try {
             new ListRouteToFileJSON().saveInFile(data, new File(System.getenv("Lab5Data")));
-        }
-        catch (NullPointerException | IOException exnp) {
+        } catch (NullPointerException | IOException exnp) {
             File path = new File("");
             do {
                 System.out.println("Введите путь до директории, где будет храниться Data.json или где уже хранится таковая:");
                 path = new File(input.nextLine());
-                if(!path.exists()) {
+                if (!path.exists()) {
                     System.out.println("Такой директории не существует");
                     continue;
                 }
